@@ -1,0 +1,40 @@
+\section{Theoretical Background}
+
+
+\subsection{Deep Reinforcement Learning}
+
+The goal in deep reinforcement learning is to control an agent attempting to maximize a reward function. 
+The deep Q-network (DQN) algorithm \cite{mnih2013playing} was capable of human level performance on many Atari video games by estimating the actions of an agent.
+However, while DQN could solve problems on complex observation spaces, it only can handle discrete action spaces. 
+It is noticeable that many tasks, on the robotic control, have continuous action spaces. 
+So DQN cannot be applied to continuous domains and it is necessary to use another algorithm that can handle this type of problems.
+
+The deep deterministic policy gradients (DDPG) algorithm consists of an actor-critic method that uses approximation functions that can learn continuous action space policies. The algorithm makes use of a neural network for the actor network and other for the critic network. These two networks computes the action prediction  for the current state and generates a temporal-difference error signal for each time step. The input of the actor network is the current state, and the output is a real value representing an action chosen for a continuous action space. The output of the critic is simply the estimated Q-value of the current state and the action given by the actor.
+
+The biggest challenge of learning in continuous action space is exploration.
+To confront this challenge is needed to construct a exploration policy $\mu'$ by adding a noise sampled from a noise process $\mathcal{N}$ to the actor network policy, defined as:
+\begin{equation}
+\mu' = \mu(s_t) + \mathcal{N}
+\end{equation}
+where $\mathcal{N}$ can be chosen in a way to suit the environment.
+Being the Ornstein-Uhlenbeck process \cite{uhlenbeck1930theory} the most used to generate temporally correlated exploration efficiency in physical control problems.
+
+In general, to train and evaluate a policy function coming out of the actor network and a value function coming out of the critic network, with thousands of simulated trajectories temporally correlated, leads to the introduction of huge amounts of variance in the approximation of a true Q-function.
+It is suggested to use a replay memory to store the experiences of the agent during training \cite{schaul2015prioritized}.
+This means, saving the states, actions, rewards and new states that the agent explored during the episode.
+And then, randomly sampling experiences to use  for learning in order to break the temporal correlations within different training episodes.
+
+The replay of experiences allows the intelligent agent to learn from recent memories, increasing  the learning speed and breaking undesirable temporal correlations.
+Even with a short memory it is possible to see a substantial improvement in the agent performance.
+Despite the application of a replay memory slows the agent learning, a better performance is achieved.
+
+Without counting the replay memory used, it is needed to make a target network to generate targets for the temporal-difference error that can regulate the learning and improve stability.
+The target network contains a copy of the actor and critic, however, with ``soft" updates.
+This means that the target network do not copy directly the weights of the actor and critic network.
+The weights, represented by $\theta$, of the target network are then updated by:
+\begin{equation}
+    \theta' \leftarrow \tau\theta + (1-\tau)\theta
+\end{equation}
+with $\tau \ll 1$. 
+Where the target is represented by the apostrophe.
+So the target values of the network change slowly and allows an improvement in the stability of the learning.
