@@ -1,0 +1,59 @@
+% interactapasample.tex
+% v1.05 - August 2017
+
+\documentclass[]{interact}
+
+\usepackage{epstopdf}% To incorporate .eps illustrations using PDFLaTeX, etc.
+\usepackage[caption=false]{subfig}% Support for small, `sub' figures and tables
+%\usepackage[nolists,tablesfirst]{endfloat}% To `separate' figures and tables from text if required
+%\usepackage[doublespacing]{setspace}% To produce a `double spaced' document if required
+%\setlength\parindent{24pt}% To increase paragraph indentation when line spacing is doubled
+
+% \usepackage[longnamesfirst,sort]{natbib}% Citation support using natbib.sty
+% \bibpunct[, ]{(}{)}{;}{a}{,}{,}% Citation support using natbib.sty
+% \renewcommand\bibfont{\fontsize{10}{12}\selectfont}% To set the list of references in 10 point font using natbib.sty
+
+\usepackage[natbibapa,nodoi]{apacite}
+\setlength\bibhang{12pt}
+\renewcommand\bibliographytypesize{\fontsize{10}{12}\selectfont}
+
+
+
+%\usepackage[natbibapa,nodoi]{apacite}% Citation support using apacite.sty. Commands using natbib.sty MUST be deactivated first!
+%\setlength\bibhang{12pt}% To set the indentation in the list of references using apacite.sty. Commands using natbib.sty MUST be deactivated first!
+%\renewcommand\bibliographytypesize{\fontsize{10}{12}\selectfont}% To set the list of references in 10 point font using apacite.sty. Commands using natbib.sty MUST be deactivated first!
+
+\theoremstyle{plain}% Theorem-like structures provided by amsthm.sty
+\newtheorem{theorem}{Theorem}[section]
+\newtheorem{lemma}[theorem]{Lemma}
+\newtheorem{corollary}[theorem]{Corollary}
+\newtheorem{proposition}[theorem]{Proposition}
+
+\theoremstyle{definition}
+\newtheorem{definition}[theorem]{Definition}
+\newtheorem{example}[theorem]{Example}
+
+\theoremstyle{remark}
+\newtheorem{remark}{Remark}
+\newtheorem{notation}{Notation}
+
+\begin{document}
+
+%\articletype{ARTICLE TEMPLATE}% Specify the article type or omit as appropriate
+
+\title{Deep Reinforcement Learning for Navigation of Mobile Robots}
+
+\author{
+\name{Junior C. Jesus\textsuperscript{a}\thanks{Email: dranaju@gmail.com (Junior C. Jesus)}, Jair A. Bottega\textsuperscript{a}\thanks{Email: jairaugustobottega@gmail.com (Jair A. Bottega)} and Daniel F. T. Gamarra\textsuperscript{a}\thanks{Email: daniel.gamarra@ufsm.br (Daniel F. T. Gamarra)}}
+\affil{\textsuperscript{a}Federal University of Santa Maria, Santa Maria, RS, Brazil}
+}
+
+\maketitle
+
+\input{sections/1_abstract.tex}
+
+
+\bibliographystyle{apacite}
+\bibliography{bib}
+
+\end{document}
