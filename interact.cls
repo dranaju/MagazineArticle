@@ -39,20 +39,20 @@
 \def\authorfont{\fontsize{11}{13}\selectfont\raggedright}%
 \def\extractfont{\fontsize{10}{12}\selectfont\leftskip12pt\rightskip12pt}%
 \def\figcaptionfont{\fontsize{8}{10}\selectfont}%
-\def\fignumfont{\fontsize{8}{10}\selectfont\bfseries}%
+\def\fignumfont{\color{blue}\fontsize{8}{10}\selectfont\bfseries}%
 \def\historyfont{\fontsize{9}{10}\selectfont\leftskip1pc\rightskip5pc plus1fill}%
 \def\keywordfont{\fontsize{9}{10}\selectfont\leftskip1pc\rightskip5pc plus1fill}%
 \def\receivedfont{\fontsize{9}{12}\selectfont\leftskip1pc\rightskip5pc}%
-\def\sectionfont{\fontsize{11}{13}\selectfont\bfseries\raggedright\boldmath}%
-\def\subsectionfont{\fontsize{11}{13}\selectfont\bfseries\itshape\raggedright\boldmath}%
-\def\subsubsectionfont{\fontsize{11}{13}\selectfont\itshape\raggedright}%
+\def\sectionfont{\color{blue}\fontsize{11}{13}\selectfont\bfseries\raggedright\boldmath}%
+\def\subsectionfont{\color{blue}\fontsize{11}{13}\selectfont\bfseries\itshape\raggedright\boldmath}%
+\def\subsubsectionfont{\color{blue}\fontsize{11}{13}\selectfont\itshape\raggedright}%
 \def\paragraphfont{\fontsize{11}{13}\selectfont\bfseries\boldmath}%
 \def\tablecaptionfont{\fontsize{8}{10}\selectfont\leftskip\tabledim\rightskip\tabledim}%
 \def\tablefont{\fontsize{8}{9}\selectfont}%
-\def\tablenumfont{\fontsize{8}{10}\selectfont\bfseries}%
+\def\tablenumfont{\color{blue}\fontsize{8}{10}\selectfont\bfseries}%
 \def\tabnotefont{\fontsize{8}{9}\selectfont}%
 \def\thanksfont{\fontsize{8}{10}\selectfont}%
-\def\titlefont{\fontsize{13}{16}\selectfont\bfseries\raggedright\boldmath}%
+\def\titlefont{\color{blue}\fontsize{13}{16}\selectfont\bfseries\raggedright\boldmath}%
 %
 \def\@xpt{10}
 \def\@xipt{11}
@@ -302,7 +302,7 @@
     {\authorfont\@author\par}%
     \ifsuppldata\else
     \vskip17pt
-    {\receivedfont{\bfseries ARTICLE HISTORY\\}\@received\par}%
+%   {\receivedfont{\bfseries \color{blue}ARTICLE HISTORY\\}\@received\par}%
     \fi
     \vskip13pt
   \egroup}
@@ -712,9 +712,9 @@
 %
 %%%%%%%%%%%%%%%%%%%%%%%%%% End Theorem-like structures %%%%%%%%%%%%%%%%%%%%%%%%%%
 %
-\renewcommand\abstractname{ABSTRACT}
+\renewcommand\abstractname{\color{blue}ABSTRACT}
 \newcommand\abbreviationsname{Abbreviations}
-\newcommand\keywordsname{KEYWORDS}
+\newcommand\keywordsname{\color{blue}KEYWORDS}
 \newcommand\amscodename{AMS CLASSIFICATION}
 \newcommand\jelcodename{JEL CLASSIFICATION}
 \newcommand\pacscodename{PACS CLASSIFICATION}
