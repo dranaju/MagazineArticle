@@ -16,8 +16,8 @@ Once the system of state and actions has been defined, it is possible to create 
 The DDPG network has 14 inputs as presented in Fig. \ref{fig:entradaESaida}, in which 10 corresponds to the laser range findings, 2 corresponds to the linear and angular velocity, and the other 2 corresponds to the relative position and angle of the mobile robot to the target.
 The sample of the laser range findings are between $-90$ and $90$ degrees in relation to the robot. The output of the network is the action of linear and angular velocity that will be applied on the mobile robot.
 
-\begin{figure}
-\centerline{\includegraphics[width=\columnwidth]{images/o_and_i.png}}
+\begin{figure}[H]
+\centerline{\includegraphics[width=8cm]{images/o_and_i.png}}
 \caption{DDPG network inputs and outputs.}
 \label{fig:entradaESaida}
 \end{figure}
@@ -29,11 +29,11 @@ The angular velocity range is constrained between $(-1,1)$ and the hyperbolic ta
 For the linear angular range, that it is constrained between $(0,1)$, the sigmoid function was used.
 As there is no laser readings in the back of robot, the backward move is not necessary.
 The output actions are then multiplied with two hyperparameters to decide the final linear and angular velocity executed by the mobile robot.
-For this, it was used as maximum linear velocity $0.22$ $m/s$ and maximum angular velocity $1$ $rad/s$ on the TurtleBot3 robot version Burger.
+For this, it was used as maximum linear velocity $0.22$ $m/s$ and maximum angular velocity $2$ $rad/s$ on the TurtleBot3 robot version Burger.
 
 
-\begin{figure}
-\centerline{\includegraphics[width=\columnwidth]{images/projeto_integrador_en.png}}
+\begin{figure}[H]
+\centerline{\includegraphics[width=12cm]{images/projeto_integrador_en.png}}
 \caption{DDPG network structure model.}
 \label{fig:projetointegrador}
 \end{figure}
@@ -52,25 +52,23 @@ where $x$ is the input of the last layer, $y$ is the predicted Q-value, and $k$ 
 There were used three environments for the simulations. The first environment is  shown in Fig. \ref{fig:environments}(a), the environment represents a free area for the robot to move.
 The walls of this environment are the only things where the robot can collide.
 If the mobile robot collide with the wall or any obstacle, a negative reward is given for this action and the current episode stops.
-
-\begin{figure}
-\centerline{\includegraphics[width=\columnwidth]{images/environments1.png}}
-\caption{Training environments used on Gazebo simulation.}
-\label{fig:environments}
-\end{figure}
-
 The second environment is shown in Fig. \ref{fig:environments}(b) and has 4 fixed obstacles.
 It means that this environment is more complex in a way that the intelligent agent have to make a better strategy to not collide.
-
 The third environment, shown in Fig. \ref{fig:environments}(c), is more complex than the previous environments.  
 The number of walls and the mobile obstacles, represented by the white blocks, makes the environment more dynamical, approaching it to a real-world environment.
+
+\begin{figure}[H]
+\centerline{\includegraphics[width=\columnwidth]{images/environments1.png}}
+\caption{Training environments used on Gazebo simulation. First environment (a), second environment (b) and third environment (c).}
+\label{fig:environments}
+\end{figure}
 
 \subsection*{Reward Function}
 
 Once the environment have been defined it is possible to simulate a controlled mobile robot for a navigation task.
 Now it is necessary to define the reward and penalty system to the Deep-RL network.
 Remembering that the rewards and penalties are attributed numbers passed to the intelligent agent.
-So, the network will make a feedforward and backpropation step in order to learn the hyperparameters.
+So, the network will make a feedforward and backpropagation step in order to learn the hyperparameters.
 
 There are four different conditions for the reward system that presented better results for the problem's resolution and are the following:
 \begin{equation}
@@ -92,4 +90,49 @@ Otherwise, the reward is based on the distance difference from the target compar
 If this difference is positive the reward given is the distance traveled multiplied by the hyperparameter $(c_{r1})$, and if the distance is negative is used the hyperparameter $(c_{r2})$.
 This motivates the mobile robot to get closer to the target position and encourages it to avoid the obstacles in the environment.
 
+\subsection*{Positioning capture in real environments}
 
+After the DDPG network training through simulation, it will be tested how effective can be a this type of network in a real environment.
+A TurtleBot3, version Burger, will be used to perform this test. But for it is necessary to obtain the angle and distance of a target for the network to complete its goal. So it was setup a camera in the ceiling to extract this information.
+
+Firstly, the essential points positions to extract the angle and distance are taken from the image.
+These positions include the target, left and right side of the robot, and three points to be a distance reference parameter.
+In Fig. \ref{fig:pixel_to_meter} is shown that were used different colored circles to identify the relevant points.
+The yellow circle was attached to the target, the blue to the left side of the robot, the red to the right side and the three green circles were used by a reference parameter to calculate the distance.
+
+\begin{figure}[H]
+\centerline{\includegraphics[width=10cm]{images/pixel_to_meter.png}}
+\caption{Real environment relevant points}
+\label{fig:pixel_to_meter}
+\end{figure}
+
+
+After the points were extracted from the center of the circles, it is possible to calculate the two necessary DDPG network inputs.
+So, it is necessary to figure out the vector $distance$ that connects the center of TurtleBot3 to the target point, and the vector $direction$ which represents the direction of robot.
+The vector $direction$ starts from the center of TurtleBot3, which is equal to the midpoint of the blue and red points.
+The blue and red circles are on left and right sides of the mobile robot, respectively.
+With this it possible to determine front of the robot.
+%aqui vou escrever mais 
+The center of green circles have a predefined distance from each other, what permits the calculation of robot and target distance by converting the pixel distance of the image to the distance in meters.
+%aqui tbm
+
+
+
+
+% e aeee
+%acabei de perder meia hora no face AAAAAAA
+% cara, na escrita n me dou mt bem, mas vou escrevendo o q vem na cabeça e após a gente estrutura melho
+% faz isso mesmo meu KKKK eu sou meio travado na vdd mas to tentando (bem travado)
+% a ideia é meter o louco e escrever tudo que vem na mente
+% isso vem com a pratica SAUHSUAS, 
+% pode se sentir a vontade pra mudar as coisas.
+% só modifiquei pq achei melhor - ficou melhor assim msm ;)
+% o que tu conseguir escrever eu e o professor gamarra corrigimos depois
+
+
+%qual tu pensa a imagem pra colocar nessa subsection ae
+%um frame com o alvo indicado, pixel meter parameter tb, e o robo? q nem o video do face? ---> meu acho que pode ser só uma imagem que contenha o robo, a referencia e tals (pode ser do primeiro ambiente que a gente tinha feito) ai tu explica através dela - OK
+
+%coloquei a imagem do grafico com os obstáculos no drive, acho q ficou ok ---> eu vi, tá top na real - :D
+% amanhã vou pegar pra escrever nos resultados, tava editando o modelo mais hj - azulzinho topi --> e as imagens pra ficarem melhor tbm
+% vou pegar pra dormir aqui na real, flws o/// falooooow veéeei até amanhã
