@@ -12,7 +12,7 @@ This methods was first explored by Tai \textit{et al.} \cite{tai2017virtual}.
 
 \subsection*{Network Structure}
 
-Once the system of state and actions has been defined, it is possible to create a DDPG network capable of resolving the problem.
+Once the system of state and actions have been defined, it is possible to create a DDPG network capable of resolving the problem.
 The DDPG network has 14 inputs as presented in Fig. \ref{fig:entradaESaida}, in which 10 corresponds to the laser range findings, 2 corresponds to the linear and angular velocity, and the other 2 corresponds to the relative position and angle of the mobile robot to the target.
 The sample of the laser range findings are between $-90$ and $90$ degrees in relation to the robot. The output of the network is the action of linear and angular velocity that will be applied on the mobile robot.
 
@@ -47,22 +47,6 @@ y = kx +b
 \end{equation}
 where $x$ is the input of the last layer, $y$ is the predicted Q-value, and $k$ and $b$ are the trained weights and bias of this layer, respectively.
 
-\subsection*{Simulation Environments}
-
-There were used three environments for the simulations. The first environment is  shown in Fig. \ref{fig:environments}(a), the environment represents a free area for the robot to move.
-The walls of this environment are the only things where the robot can collide.
-If the mobile robot collide with the wall or any obstacle, a negative reward is given for this action and the current episode stops.
-The second environment is shown in Fig. \ref{fig:environments}(b) and has 4 fixed obstacles.
-It means that this environment is more complex in a way that the intelligent agent have to make a better strategy to not collide.
-The third environment, shown in Fig. \ref{fig:environments}(c), is more complex than the previous environments.  
-The number of walls and the mobile obstacles, represented by the white blocks, makes the environment more dynamical, approaching it to a real-world environment.
-
-\begin{figure}[H]
-\centerline{\includegraphics[width=\columnwidth]{images/environments1.png}}
-\caption{Training environments used on Gazebo simulation. First environment (a), second environment (b) and third environment (c).}
-\label{fig:environments}
-\end{figure}
-
 \subsection*{Reward Function}
 
 Once the environment have been defined it is possible to simulate a controlled mobile robot for a navigation task.
@@ -92,8 +76,10 @@ This motivates the mobile robot to get closer to the target position and encoura
 
 \subsection*{Positioning capture in real environments}
 
-After the DDPG network training through simulation, it will be tested how effective can be a this type of network in a real environment.
-A TurtleBot3, version Burger, will be used to perform this test. But for it is necessary to obtain the angle and distance of a target for the network to complete its goal. So it was setup a camera in the ceiling to extract this information.
+After the DDPG network training through simulation, it will be tested how effective can be this type of network in a real environment.
+A TurtleBot3, version Burger, will be used to perform this test.
+But for it is necessary to obtain the angle and distance of a target for the network to complete its goal.
+So it was setup a camera in the ceiling to extract this information.
 
 Firstly, the essential points positions to extract the angle and distance are taken from the image.
 These positions include the target, left and right side of the robot, and three points to be a distance reference parameter.
@@ -109,9 +95,19 @@ The yellow circle was attached to the target, the blue to the left side of the r
 
 After the points were extracted from the center of the circles, it is possible to calculate the two necessary DDPG network inputs.
 So, it is necessary to figure out the vector $distance$ that connects the center of TurtleBot3 to the target point, and the vector $direction$ which represents the direction of robot.
-The vector $direction$ starts from the center of TurtleBot3, which is equal to the midpoint of the blue and red points.
-The blue and red circles are on left and right sides of the mobile robot, respectively.
-With this it possible to determine front of the robot.
+Firstly, it is needed to compute the vector $distance$.
+It starts from the center of TurtleBot3, which is equal to the midpoint of the blue and red points.
+The center of green circles have a predefined distance from each other, what permits the calculation of robot and target distance, doing by converting the module of vector $distance$ in pixels to the distance in meters.
+In other words, the actual distance between target and robot is estimated by compare the pixels of vector $distance$ norm with the pixels from vector that connects the green circles, which real distance is already known. 
+
+%direction vector
+The vector $direction$, like the $distance$, starts from the center of TurtleBot3.
+With the blue and red circles that are on left and right sides of the mobile robot, respectively, it is possible to determine the direction of the front of robot, represented as vector $direction$.
+%or the 
+It is calculated by extracting the vector which goes from the blue to the red circle center and rotating it in 90 degrees.
+
+
+
 %aqui vou escrever mais 
 The center of green circles have a predefined distance from each other, what permits the calculation of robot and target distance by converting the pixel distance of the image to the distance in meters.
 %aqui tbm
@@ -119,9 +115,22 @@ The center of green circles have a predefined distance from each other, what per
 
 
 
+
+After the points were extracted from the center of the circles, it is possible to calculate the two necessary DDPG network inputs.
+So, it is necessary to figure out the vector $distance$ that connects the center of TurtleBot3 to the target point, and the vector $direction$ which represents the direction of robot.
+The vector $direction$ starts from the center of TurtleBot3, which is equal to the midpoint of the blue and red points.
+The blue and red circles are on left and right sides of the mobile robot, respectively.
+With this it is possible to determine the front of the robot.
+
+%aqui vou escrever mais 
+The center of green circles have a predefined distance from each other, what permits the calculation of robot and target distance by converting the pixel distance of the image to the distance in meters.
+%aqui tbm
+
+
+
 % e aeee
 %acabei de perder meia hora no face AAAAAAA
-% cara, na escrita n me dou mt bem, mas vou escrevendo o q vem na cabeça e após a gente estrutura melho
+% cara, na escrita n me dou mt bem, mas vou escrevendo o q vem na cabeça e após a gente estrutura melhor
 % faz isso mesmo meu KKKK eu sou meio travado na vdd mas to tentando (bem travado)
 % a ideia é meter o louco e escrever tudo que vem na mente
 % isso vem com a pratica SAUHSUAS, 

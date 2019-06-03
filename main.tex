@@ -18,6 +18,13 @@
 \usepackage{xcolor}
 \usepackage{float}
 
+\usepackage{hyperref}
+\hypersetup{
+    colorlinks=true,
+    linkcolor=blue,
+    citecolor=blue,
+}
+
 %\usepackage[natbibapa,nodoi]{apacite}% Citation support using apacite.sty. Commands using natbib.sty MUST be deactivated first!
 %\setlength\bibhang{12pt}% To set the indentation in the list of references using apacite.sty. Commands using natbib.sty MUST be deactivated first!
 %\renewcommand\bibliographytypesize{\fontsize{10}{12}\selectfont}% To set the list of references in 10 point font using apacite.sty. Commands using natbib.sty MUST be deactivated first!
@@ -39,11 +46,15 @@
 \begin{document}
 
 %\articletype{ARTICLE TEMPLATE}% Specify the article type or omit as appropriate
-\title{Deep Reinforcement Learning for Navigation of Mobile Robots}
+\title{Deep Deterministic Policy Gradients for Navigation of Mobile Robots}
 
 \author{
-\name{Junior C. Jesus\textsuperscript{a}\thanks{Email: dranaju@gmail.com (Junior C. Jesus)}, Jair A. Bottega\textsuperscript{a}\thanks{Email: jairaugustobottega@gmail.com (Jair A. Bottega)} and Daniel F. T. Gamarra\textsuperscript{a}\thanks{Email: daniel.gamarra@ufsm.br (Daniel F. T. Gamarra)}}
-\affil{\textsuperscript{a}Federal University of Santa Maria, Santa Maria, RS, Brazil}
+\name{Junior C. Jesus\textsuperscript{a}\thanks{Email: dranaju@gmail.com (Junior C. Jesus)},
+Jair A. Bottega\textsuperscript{a}\thanks{Email: jairaugustobottega@gmail.com (Jair A. Bottega)},
+Marco A. S. L. Cuadros\textsuperscript{b}\thanks{Email: marcoantonio@ifes.edu.br (Marco A. S. L. Cuadros)} and
+Daniel F. T. Gamarra\textsuperscript{a}\thanks{Email: daniel.gamarra@ufsm.br (Daniel F. T. Gamarra)}}
+\affil{\textsuperscript{a}Federal University of Santa Maria, Santa Maria, RS, Brazil;
+\textsuperscript{b}Federal Institute of Espirito Santo, Espirito Santo, SC, Brazil}
 }
 
 \maketitle

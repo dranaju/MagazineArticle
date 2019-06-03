@@ -4,23 +4,14 @@ For the analysis of a DDPG network was used the programming language Python \cit
 The Python language has as priority the legibility of the code under speed. 
 The vast library and frameworks provided by Python makes it an exquisite tool for machine learning and data analysis purposes.
 
-\subsection*{ROS}
-
-The robot operations system (ROS) is a flexible framework to write software for robots.
-ROS \cite{pyo2015ros} is a collection of tools, and libraries.
-ROS provides operational system's standard services, like hardware's abstraction, device low level control, messages between processes and package management. 
-The set of ROS processes in execution are represented by graphs architecture where the processing is performed on nodes that receive and send messages as sensors, control, state, planning, actuator and others.
-
-Despite the importance of low latency on the robots control, ROS is not a real-time operational system, although it is possible to integrate ROS with real-time code. This lack of real-time system is being addressed on the development of ROS 2.0.
-
 \subsection*{TurtleBot}
 
 TurtleBot is a ROS standard platform robot, and there are 3 version of the series. TurtleBots are affordable and programmable mobile robots for use in education, research, hobby, and product prototyping.
 The third version was used on this project, shown in Fig. \ref{fig:turtlebot3}.
 
 \begin{figure}[H]
-\centerline{\includegraphics[width=12cm]{images/burger.png}}
-\caption{Real and simulated TurtleBot3 Burger in Gazebo.}
+\centerline{\includegraphics[width=6cm]{images/burger_real.png}}
+\caption{Real TurtleBot3 version Burger.}
 \label{fig:turtlebot3}
 \end{figure}
 
@@ -68,6 +59,15 @@ Battery                        & \begin{tabular}[c]{@{}c@{}}Lithium polymer \\ 1
 \end{center}
 \end{table}
 
+\subsection*{ROS}
+
+The robot operations system (ROS) is a flexible framework to write software for robots.
+ROS \cite{pyo2015ros} is a collection of tools, and libraries.
+ROS provides operational system's standard services, like hardware's abstraction, device low level control, messages between processes and package management. 
+The set of ROS processes in execution are represented by graphs architecture where the processing is performed on nodes that receive and send messages as sensors, control, state, planning, actuator and others.
+
+Despite the importance of low latency on the robots control, ROS is not a real-time operational system, although it is possible to integrate ROS with real-time code. This lack of real-time system is being addressed on the development of ROS 2.0.
+
 \subsection*{Gazebo}
 
 Robot simulation is an essential tool on all roboticist's toolbox.
@@ -81,3 +81,19 @@ Open Source Computer Vision (OpenCV) is an open source computer vision and machi
 It is mainly used for developing advanced image processing and computer vision applications \cite{bradski2008learning}.
 With OpenCV is possible to take frames out of a video and run algorithms to get necessary information.
 It can be great to identify an object, recognize a face or track the movement of an object, extracting coordinates, for example, what is very useful and commonly used in the wide area of robotics.
+
+\subsection*{Simulation Environments}
+
+There were used three environments for the simulations. The first environment is  shown in Fig. \ref{fig:environments}(a), the environment represents a free area for the robot to move.
+The walls of this environment are the only things where the robot can collide.
+If the mobile robot collide with the wall or any obstacle, a negative reward is given for this action and the current episode stops.
+The second environment is shown in Fig. \ref{fig:environments}(b) and has 4 fixed obstacles.
+It means that this environment is more complex in a way that the intelligent agent have to make a better strategy to not collide.
+The third environment, shown in Fig. \ref{fig:environments}(c), is more complex than the previous environments.  
+The number of walls and the mobile obstacles, represented by the white blocks, makes the environment more dynamical, approaching it to a real-world environment.
+
+\begin{figure}[H]
+\centerline{\includegraphics[width=\columnwidth]{images/environments1.png}}
+\caption{Training environments used on Gazebo simulation. First environment (a), second environment (b) and third environment (c).}
+\label{fig:environments}
+\end{figure}

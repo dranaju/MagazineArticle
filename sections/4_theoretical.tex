@@ -1,13 +1,12 @@
-\section*{Theoretical Background}
-
-
-\subsection*{Deep Reinforcement Learning}
+\section*{Deep Reinforcement Learning}
 
 The goal in deep reinforcement learning is to control an agent attempting to maximize a reward function. 
 The deep Q-network (DQN) algorithm \cite{mnih2013playing} was capable of human level performance on many Atari video games by estimating the actions of an agent.
 However, while DQN could solve problems on complex observation spaces, it only can handle discrete action spaces. 
 It is noticeable that many tasks, on the robotic control, have continuous action spaces. 
 So DQN cannot be applied to continuous domains and it is necessary to use another algorithm that can handle this type of problems.
+
+\subsection*{Deep Deterministic Policy Gradients}
 
 The deep deterministic policy gradients (DDPG) algorithm consists of an actor-critic method that uses approximation functions that can learn continuous action space policies. The algorithm makes use of a neural network for the actor network and other for the critic network. These two networks computes the action prediction  for the current state and generates a temporal-difference error signal for each time step. The input of the actor network is the current state, and the output is a real value representing an action chosen for a continuous action space. The output of the critic is simply the estimated Q-value of the current state and the action given by the actor.
 

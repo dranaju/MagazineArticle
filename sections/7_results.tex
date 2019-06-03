@@ -3,10 +3,12 @@
 This section deals with the presentation and discussion of results.
 The collected data are related to the obtained reward from the artificial neural network of the project.
 With these data is possible to see what is the learning degree of the agent in the environment because the gained reward is intrinsically attached to the performance of the agent on the environment that it must go.
-All the training environments were arranged by ROBOTIS, however, some alterations were done on the source code of the Gazebo simulation in order for the simulated mobile robot to use the reward system defined on this paper.
+All the training environments were arranged by ROBOTIS, however, some alterations were done on the source code of the Gazebo simulation in order to simulate mobile robots to use the reward system defined on this paper.
+
+\subsection*{Simulation Results}
 
 A mobile robot with a DDPG network was trained in order to make the experiments in the environments presented on Fig. \ref{fig:environments}, where the goal of the mobile robot is to get to the target.
-For the first test was used the first environment that shows, in Fig. \ref{fig:amb1target}, a sequence of frames of the robot and the target. We can observe how the robot start in an initial position distant from the target, navigating in order to reach the target.
+The initial test used the first environment defined. It is shown in Fig. \ref{fig:amb1target} a sequence of frames of the robot and the target. We can observe how the robot start in an initial position distant from the target, navigating in order to reach the target.
 
 \begin{figure}[H]
 \centerline{\includegraphics[width=\columnwidth]{images/amb1target.png}}
@@ -74,8 +76,9 @@ In order to resolve these actions, probably, it would be necessary to create a r
 \end{figure}
 
 % Continua
+\subsection*{Experiments with Turtlebot}
 
-After the training and validation of each simulation environment, it was created two more environments for the testing of the DDPG network in the real world.
+After the training and validation of each simulation environment, there were created two more environments for the testing of the DDPG network in the real world.
 The first real environment is shown in Fig. \ref{fig:real_envs} (a) and resembles the first simulation with no obstacles. The second environment is shown in Fig. \ref{fig:real_envs} (b) and it presents a complex environment similar to the second and third used on simulation with the exception of not having moving obstacles.
 
 \begin{figure}[H]
@@ -86,7 +89,7 @@ The first real environment is shown in Fig. \ref{fig:real_envs} (a) and resemble
 
 With the target defined on the first real environment, it was executed the DDPG network on the Turtlebot3.
 In the graph, shown in Fig. \ref{fig:env1_graph}, is possible to see the trajectory made by the network to arrive to the target.
-In the Fig. \ref{fig:frames_env1} is shown by frames the trajectory made my the robot to complete the task.
+Fig. \ref{fig:frames_env1} shows by frames the trajectory made by the robot to complete the task.
 
 \begin{figure}[H]
 \centerline{\includegraphics[width=12cm]{images/env1_graph.png}}
@@ -100,7 +103,7 @@ In the Fig. \ref{fig:frames_env1} is shown by frames the trajectory made my the 
 \label{fig:frames_env1}
 \end{figure}
 
-For final test of the network, it was used the second real environment. In the graph, shown in Fig. \ref{fig:env2_graph}, even with obstacle the network was capable to arrive to the target. In the Fig. \ref{fig:frames_env2} is shown by frames the trajectory made my the robot to complete the task. %So, with these results applied on real world environment we can see how effective can be a DDPG network trained in simulation environment
+For final test of the network, it was used the second real environment. In the graph, shown in Fig. \ref{fig:env2_graph}, even with obstacle the network was capable to arrive to the target. In the Fig. \ref{fig:frames_env2} is shown by frames the trajectory made by the robot to complete the task. %So, with these results applied on real world environment we can see how effective can be a DDPG network trained in simulation environment
 The robot was able to accomplish both task given in the real world environments.
 This shows how effective can be the DDPG networks, trained in a simulation environment, in completing complex tasks on physical environment.
 
