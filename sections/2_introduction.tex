@@ -1,19 +1,19 @@
 \section*{Introduction}
-Deep Reinforcement Learning (Deep-RL) is starting to achieve interesting results in different areas such as tasks involving the control on discrete systems \citep{mnih2013playing}, \cite{schaul2015prioritized} continuous systems \citep{lillicrap2015continuous}, \citep{schulman2015high}, %\citep{nachum2017trust}
-and more recently in robotics \citep{gu2017deep}, \citep{mahmood2018benchmarking}.
-The first applications of deep reinforcement learning in robotics were in the use of manipulation in a  fully observable and stable environment \citep{gu2016continuous}, but tasks in mobile robotics involving obstacles interacting with physical environments and objects, turns the workplace more complex.
-In order to overcome this problem, Deep-RL methods normally try to discretize the actions to turn simpler the problem \cite{zhu2017target}, \cite{tai2016towards}.
-Recent articles explore continuous control actions used for navigation of mobile robots with good results \cite{tai2017virtual}, \cite{chen2017socially}.
+Deep Reinforcement Learning (Deep-RL) is starting to achieve interesting results in different areas such as tasks involving the control on discrete systems (Mnih et al. \citeyear{mnih2013playing}; Schaul et al. \citeyear{schaul2015prioritized}) continuous systems (Lillicrap et al. \citeyear{lillicrap2015continuous}; Schulman et al. \citeyear{schulman2015high}; Nachaum et al. \citeyear{nachum2017trust})
+and more recently in robotics (Gu et al. \citeyear{gu2017deep}; Mahmood et al. \citeyear{mahmood2018benchmarking}; Richter et al. \citeyear{richter2019open}).
+The first applications of deep reinforcement learning in robotics were in the use of manipulation in a  fully observable and stable environment (Gu et al. \citeyear{gu2016continuous}) but tasks in mobile robotics involving obstacles interacting with physical environments and objects, turns the workplace more complex.
+In order to overcome this problem, Deep-RL methods normally try to discretize the actions to turn simpler the problem (Zhu et al. \citeyear{zhu2017target}; Tai and Liu \citeyear{tai2016towards}).
+Recent articles explore continuous control actions used for navigation of mobile robots with good results (Tai et al. \citeyear{tai2017virtual}; Chen et al. \citeyear{chen2017socially}).
 
 In this paper, we try to demonstrate how effective can be the Deep-RL used on simulated environments.
-For that, three environments were used on Gazebo, which can provide us with a lot of resources for robot simulation, for example we can create an environment and insert a model of a real mobile robot \cite{fairchild2016ros}, \cite{joseph2015mastering}. 
-The mobile robot used on the simulation was the TurtleBot3.
+For that, two environments were used on Gazebo, which the simulator can provide us with a lot of resources for robot simulation, for example we can create an environment and insert a model of a real mobile robot (Fair and Harman \citeyear{fairchild2016ros}; Joseph \citeyear{joseph2015mastering}). 
+The mobile robot used on the simulation was the Turtlebot3.
 
 The objective of this research is to show the efficiency of a Deep-RL network in the task of mobile robot navigation from an initial position to a target on an environment.
-To simplify this problem it was created a network which has 14 inputs and 2 outputs, as shown in Fig. \ref{fig:mapless}.
+To simplify this problem it was created a network which has 14 inputs and 2 outputs, as shown in {\color{blue}Figure} \ref{fig:mapless}.
 The 14 inputs are composed by 10 readings of the laser sensor, the previous linear and angular velocity, the distance and angle of the mobile robot related to the target.
 And the outputs of the network are the linear and angular velocity that are sent to the robot in order to get to the target.
-It is expected the intelligent agent won't collide with any obstacle on its trajectory to the target.
+It is expected that intelligent agent won't collide with any obstacle on its trajectory to the target.
 
 \begin{figure}[H]
 \centerline{\includegraphics[width=12cm]{images/mapless_en.png}}

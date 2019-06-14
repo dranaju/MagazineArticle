@@ -8,13 +8,13 @@ where $x_t$ is the observation from the raw sensor information, $p_t$ is the rel
 All variables specified, previously, can be defined as the current state $s_t$ of the mobile robot.
 With this model it is possible to get the actions that the robot will make, given its current state.
 However, it is needed to ensure a minimum reading frequency of the input data to control the movement of the robot because if the robot get a slow read frequency of the inputs it cannot react to an obstacle in the trajectory to a target. In this way, the robot can react to new states quickly.
-This methods was first explored by Tai \textit{et al.} \cite{tai2017virtual}.
+This method was first explored by Tai et al. (Tai et al. \citeyear{tai2017virtual}).
 
 \subsection*{Network Structure}
 
-Once the system of state and actions have been defined, it is possible to create a DDPG network capable of resolving the problem.
-The DDPG network has 14 inputs as presented in Fig. \ref{fig:entradaESaida}, in which 10 corresponds to the laser range findings, 2 corresponds to the linear and angular velocity, and the other 2 corresponds to the relative position and angle of the mobile robot to the target.
-The sample of the laser range findings are between $-90$ and $90$ degrees in relation to the robot. The output of the network is the action of linear and angular velocity that will be applied on the mobile robot.
+Once the state and actions of the system have been defined, it is possible to create a DDPG network capable of resolving the problem.
+The DDPG network has 14 inputs as presented in {\color{blue}Figure} \ref{fig:entradaESaida}, in which 10 corresponds to the laser range findings, 2 corresponds to the linear and angular velocity, and the other 2 corresponds to the relative position and angle of the mobile robot to the target.
+The laser range findings are between $-90$ and $90$ degrees in relation to the robot. The output of the network is the action of linear and angular velocity that will be applied on the mobile robot.
 
 \begin{figure}[H]
 \centerline{\includegraphics[width=8cm]{images/o_and_i.png}}
@@ -22,14 +22,14 @@ The sample of the laser range findings are between $-90$ and $90$ degrees in rel
 \label{fig:entradaESaida}
 \end{figure}
 
-The network structure of the DDPG is shown in Fig \ref{fig:projetointegrador}. 
+The network structure of the DDPG is shown in {\color{blue}Figure} \ref{fig:projetointegrador}. 
 The actor-network has as input the current state of the mobile robot followed by 3 fully-connected neural networks layers with 512 nodes.
-This input of the networks is transformed on the linear and angular velocity that will be the commands sent to the motor of the mobile robot. 
+The network inputs are transformed in the linear and angular velocity that will be the commands sent to the motors of the mobile robot. 
 The angular velocity range is constrained between $(-1,1)$ and the hyperbolic tangent function $(tanh)$ is used as activation function.
-For the linear angular range, that it is constrained between $(0,1)$, the sigmoid function was used.
-As there is no laser readings in the back of robot, the backward move is not necessary.
+The linear angular range used the sigmoid function as activation function to constrain its values between $(0,1)$.
+As there are no laser readings in the back of robot, the backward move is not necessary.
 The output actions are then multiplied with two hyperparameters to decide the final linear and angular velocity executed by the mobile robot.
-For this, it was used as maximum linear velocity $0.22$ $m/s$ and maximum angular velocity $2$ $rad/s$ on the TurtleBot3 robot version Burger.
+For this, it was used as maximum linear velocity $0.22$ $m/s$ and maximum angular velocity $2$ $rad/s$ on the Turtlebot3 robot version Burger.
 
 
 \begin{figure}[H]
@@ -49,8 +49,8 @@ where $x$ is the input of the last layer, $y$ is the predicted Q-value, and $k$ 
 
 \subsection*{Reward Function}
 
-Once the environment have been defined it is possible to simulate a controlled mobile robot for a navigation task.
-Now it is necessary to define the reward and penalty system to the Deep-RL network.
+Once the environment has been defined it is possible to simulate a controlled mobile robot for a navigation task.
+It is necessary to define the reward and penalty system to the Deep-RL network.
 Remembering that the rewards and penalties are attributed numbers passed to the intelligent agent.
 So, the network will make a feedforward and backpropagation step in order to learn the hyperparameters.
 
@@ -76,15 +76,15 @@ This motivates the mobile robot to get closer to the target position and encoura
 
 \subsection*{Positioning capture in real environments}
 
-After the DDPG network training through simulation, it will be tested how effective can be this type of network in a real environment.
-A TurtleBot3, version Burger, will be used to perform this test.
-But for it is necessary to obtain the angle and distance of a target for the network to complete its goal.
+After training the DDPG network through simulation, it will be tested in a real scenario.
+The Turtlebot3, version Burger, will be used to perform this test.
+It will be necessary to obtain the angle and distance of a target for the network to complete its goal.
 So it was setup a camera in the ceiling to extract this information.
 
 Firstly, the essential points positions to extract the angle and distance are taken from the image.
 These positions include the target, left and right side of the robot, and three points to be a distance reference parameter.
-In Fig. \ref{fig:pixel_to_meter} is shown that were used different colored circles to identify the relevant points.
-The yellow circle was attached to the target, the blue to the left side of the robot, the red to the right side and the three green circles were used by a reference parameter to calculate the distance.
+{\color{blue}Figure} \ref{fig:pixel_to_meter} shows a frame of the scenario in which there were used different colored circles to identify the relevant points.
+The yellow circle was attached as the target, the blue to the left side of the robot, the red to the right side and the three green circles were used as reference parameter to calculate the distance.
 
 \begin{figure}[H]
 \centerline{\includegraphics[width=10cm]{images/pixel_to_meter.png}}
@@ -94,36 +94,37 @@ The yellow circle was attached to the target, the blue to the left side of the r
 
 
 After the points were extracted from the center of the circles, it is possible to calculate the two necessary DDPG network inputs.
-So, it is necessary to figure out the vector $distance$ that connects the center of TurtleBot3 to the target point, and the vector $direction$ which represents the direction of robot.
-Firstly, it is needed to compute the vector $distance$.
-It starts from the center of TurtleBot3, which is equal to the midpoint of the blue and red points.
-The center of green circles have a predefined distance from each other, what permits the calculation of robot and target distance, doing by converting the module of vector $distance$ in pixels to the distance in meters.
-In other words, the actual distance between target and robot is estimated by compare the pixels of vector $distance$ norm with the pixels from vector that connects the green circles, which real distance is already known. 
-
-%direction vector
-The vector $direction$, like the $distance$, starts from the center of TurtleBot3.
-With the blue and red circles that are on left and right sides of the mobile robot, respectively, it is possible to determine the direction of the front of robot, represented as vector $direction$.
-%or the 
-It is calculated by extracting the vector which goes from the blue to the red circle center and rotating it in 90 degrees.
+So, it is necessary to figure out the vector distance that connects the center of the Turtlebot3 to the target point, and the vector direction which represents the direction of the robot.
+% Firstly, it is needed to compute the vector $distance$.
+% It starts from the center of the Turtlebot3, which is equal to the midpoint of the blue and red points.
+% The center of green circles have a predefined distance from each other, that helps to calculate the robot and target distance, doing by converting the module of vector $distance$ in pixels to the distance in meters.
+% In other words, the actual distance between target and robot is estimated by comparing the pixels of the norm of the vector $distance$ with the pixels from the norm of the vector that connects the green circles, which real distance is already known. 
+% %direction vector   
+% The vector $direction$, like the $distance$, starts from the center of the Turtlebot3.
+% With the blue and red circles that are on left and right sides of the mobile robot, respectively, it is possible to determine the direction of the robot's front, represented as vector $direction$.
+% It is calculated by extracting the perpendicular vector to the vector which goes from the blue circle center to the red circle center.
+% Now that we have the direction of Turtlebot3, it is possible to extract the angle between vector $distance$ and vector $direction$, which is the angle between the target and the front of the mobile robot.
+% Finally, the two necessary information needed was obtained.
+The distance and angle between the mobile robot and the target are calculated frame by frame, and it is used as the necessary inputs of the DDPG network simultaneously.
 
 
 
 %aqui vou escrever mais 
-The center of green circles have a predefined distance from each other, what permits the calculation of robot and target distance by converting the pixel distance of the image to the distance in meters.
+%The center of green circles have a predefined distance from each other, what permits the calculation of robot and target distance by converting the pixel distance of the image to the distance in meters.
 %aqui tbm
 
 
 
 
 
-After the points were extracted from the center of the circles, it is possible to calculate the two necessary DDPG network inputs.
-So, it is necessary to figure out the vector $distance$ that connects the center of TurtleBot3 to the target point, and the vector $direction$ which represents the direction of robot.
-The vector $direction$ starts from the center of TurtleBot3, which is equal to the midpoint of the blue and red points.
-The blue and red circles are on left and right sides of the mobile robot, respectively.
-With this it is possible to determine the front of the robot.
+%After the points were extracted from the center of the circles, it is possible to calculate the two necessary DDPG network inputs.
+%So, it is necessary to figure out the vector $distance$ that connects the center of Turtlebot3 to the target point, and the vector $direction$ which represents the direction of robot.
+%The vector $direction$ starts from the center of Turtlebot3, which is equal to the midpoint of the blue and red points.
+%The blue and red circles are on left and right sides of the mobile robot, respectively.
+%With this it is possible to determine the front of the robot.
 
 %aqui vou escrever mais 
-The center of green circles have a predefined distance from each other, what permits the calculation of robot and target distance by converting the pixel distance of the image to the distance in meters.
+%The center of green circles have a predefined distance from each other, what permits the calculation of robot and target distance by converting the pixel distance of the image to the distance in meters.
 %aqui tbm
 
 

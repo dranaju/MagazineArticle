@@ -1,7 +1,7 @@
 \section*{Deep Reinforcement Learning}
 
 The goal in deep reinforcement learning is to control an agent attempting to maximize a reward function. 
-The deep Q-network (DQN) algorithm \cite{mnih2013playing} was capable of human level performance on many Atari video games by estimating the actions of an agent.
+The deep Q-network (DQN) algorithm (Mnih et al. \citeyear{mnih2013playing}) was capable of human level performance on many Atari video games by estimating the actions of an agent.
 However, while DQN could solve problems on complex observation spaces, it only can handle discrete action spaces. 
 It is noticeable that many tasks, on the robotic control, have continuous action spaces. 
 So DQN cannot be applied to continuous domains and it is necessary to use another algorithm that can handle this type of problems.
@@ -16,10 +16,10 @@ To confront this challenge is needed to construct a exploration policy $\mu'$ by
 \mu' = \mu(s_t) + \mathcal{N}
 \end{equation}
 where $\mathcal{N}$ can be chosen in a way to suit the environment.
-Being the Ornstein-Uhlenbeck process \cite{uhlenbeck1930theory} the most used to generate temporally correlated exploration efficiency in physical control problems.
+Being the Ornstein-Uhlenbeck process (Uhlenbeck and Ornstein \citeyear{uhlenbeck1930theory}) the most used to generate temporally correlated exploration efficiency in physical control problems.
 
 In general, to train and evaluate a policy function coming out of the actor network and a value function coming out of the critic network, with thousands of simulated trajectories temporally correlated, leads to the introduction of huge amounts of variance in the approximation of a true Q-function.
-It is suggested to use a replay memory to store the experiences of the agent during training \cite{schaul2015prioritized}.
+It is suggested to use a replay memory to store the experiences of the agent during training (Schaul et al. \citeyear{schaul2015prioritized}).
 This means, saving the states, actions, rewards and new states that the agent explored during the episode.
 And then, randomly sampling experiences to use  for learning in order to break the temporal correlations within different training episodes.
 
